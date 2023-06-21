@@ -1,0 +1,54 @@
+Comparison between spark and hadoop
+  hadoop is not suited for iterative work load as it requires lot of disk io operation 
+  but spark on the other hand is in memory operator so its much more better there. 
+  Remember spark is never completely in memory based architecture 
+
+
+Spark architecture 
+
+Driver (Spark Context) >> Cluster Manager >> several Workers (Executors)
+Through a driver we submit the job and the spark context object will be created 
+that would live throughout the execution of the job 
+
+
+High level architecture of spark 
+
+data source api >> spark core >> dataframe api >> spark, sql, streaming, mllib, graphx etc 
+
+
+Different mode of execution of spark 
+Stand alone mode - for development and learning 
+Spark services run on multiple jvms but same machine 
+
+local mode - single jvm .. mainly used for learning. no need of hadoop - distributed storage system 
+
+Cluster mode  -  used in production - its fully distributed in nature . can be managed by yarn and mesos 
+-------------------------------------
+RDD
+Resilient Distributed DataStructure 
+------------------------------------
+its like from data source the data will be pulled and then stored in a variable/object called RDD which is immutable and is stored in memory not in disks 
+
+Parition and data locality 
+this thing happen during spark job 
+the data from the data node will be transferred from its disks to ram
+data locality means the data from the data node where the data is present is itself used for ram processing meaning data will transferred to same machines ram and not in some other machines 
+
+Rdds are partitioned and distributed. one of the most important property of rdd . 
+ Three ways of creating rdd 
+ 1. Reading file from a distributed source 
+ 2. Using parellelise api - data comming from single source. its not distributed the  parellelise api will distribute them 
+ 3. Using makeRDD api 
+
+
+DataFrame in spark 
+  Data is organized into columns 
+  spark can serialize the data to off heap storage in a binary format and then perform many transformation directly on this off-heap memory
+  Custom memory management 
+  No garbage collection is involved as serialization is avoided 
+  Query optimization plan - Catalyst query optmizer 
+
+Spark sql
+spark module for structured data processing using sql or dataframe api 
+connect to any data sources - hive, avro, Parquet, ORC, JSON
+
